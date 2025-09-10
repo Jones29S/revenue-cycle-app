@@ -17,12 +17,3 @@ This is a Flask-based web application designed to help healthcare analysts and f
 - HTML/CSS
 - Gunicorn (for production deployment)
 
-## 📦 Setup Instructions
-
-Clone the repo and install dependencies:
-
-```bash
-git clone https://github.com/Jones29S/revenue-cycle-app.git
-cd revenue-cycle-app
-pip install -r requirements.txt
-"# revenue-cycle-app" 
