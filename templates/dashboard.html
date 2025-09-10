@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Revenue Cycle Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Revenue Cycle Dashboard</h1>
+        <canvas id="revenueChart"></canvas>
+        <table>
+            <tr><th>Payer</th><th>Claims</th><th>Payments</th><th>Denials</th><th>Outstanding</th></tr>
+            {% for row in data %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>${{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>${{ row[4] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [{% for row in data %}"{{ row[0] }}"{% if not loop.last %},{% endif %}{% endfor %}],
+                datasets: [{
+                    label: 'Payments Received',
+                    data: [{% for row in data %}{{ row[2] }},{% endfor %}],
+                    backgroundColor: 'rgba(54, 162, 235, 0.7)'
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
+<p><a href="/add">➕ Add New Record</a></p>
